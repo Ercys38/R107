@@ -1,31 +1,32 @@
-def saisir_heure(prompt):
-    while True:
-        try:
-            h = int(input(prompt))
-            if 0 <= h <= 23:
-                return h
-            print("Entrez une heure entre 0 et 23.")
-        except ValueError:
-            print("Veuillez entrer un entier.")
+while True:
+    debut = int(input("Donnez l’heure de début de la location (un entier) : "))
+    fin = int(input("Donnez l’heure de fin de la location (un entier) : "))
 
-debut = saisir_heure("Heure de début (0-23) : ")
-fin = saisir_heure("Heure de fin (0-23) : ")
+    if not (0 <= debut <= 24) or not (0 <= fin <= 24):
+        print("Les heures doivent être comprises entre 0 et 24 !")
+        continue
+    if debut == fin:
+        print("Attention ! l’heure de fin est identique à l’heure de début.")
+        continue
+    if debut > fin:
+        print("Attention ! le début de la location est après la fin ...")
+        continue
 
-heures_offpeak = 0
-heures_peak = 0
+    heures_tarif_1 = 0
+    heures_tarif_2 = 0
 
-heure = debut
-while heure != fin:
-    if heure < 7 or heure >= 17:
-        heures_offpeak += 1
-    else:
-        heures_peak += 1
-    heure = (heure + 1) % 24
+    for h in range(debut, fin):
+        if (0 <= h < 7) or (17 <= h < 24):
+            heures_tarif_1 += 1
+        else:
+            heures_tarif_2 += 1
 
-duree = heures_offpeak + heures_peak
-cout = heures_offpeak * 1 + heures_peak * 2
+    total = heures_tarif_1 * 1.0 + heures_tarif_2 * 2.0
 
-print("Durée (heures) :", duree)
-print("Heures à 1€/h  :", heures_offpeak)
-print("Heures à 2€/h  :", heures_peak)
-print("Total à payer  :", cout, "€")
+    print("Vous avez loué votre vélo pendant")
+    if heures_tarif_1 > 0:
+        print(f"{heures_tarif_1} heure(s) au tarif horaire de 1.0 euro(s)")
+    if heures_tarif_2 > 0:
+        print(f"{heures_tarif_2} heure(s) au tarif horaire de 2.0 euro(s)")
+    print(f"Le montant total à payer est de {total:.1f} euro(s).")
+    break

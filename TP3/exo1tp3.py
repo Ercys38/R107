@@ -6,7 +6,7 @@ for i in range(N + 1):
     somme += i
 print("Somme des entiers de 0 à", N, "=", somme)
 
-valeur = None
+valeur = 0
 while valeur != 100:
     valeur = int(input("Entrez 100 pour arrêter : "))
 print("Fin de l'attente.")
