@@ -4,7 +4,6 @@ coeffs = []
 
 for i in range(1, 6):
     ligne = input(f"Veuillez entrer la note du module {i} et le coefficient correspondant : ")
-    # On découpe la chaîne sur l'espace
     morceaux = ligne.split(" ")
 
 
